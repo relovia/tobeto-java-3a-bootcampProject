@@ -12,5 +12,4 @@ public class BootcampProjectApplication {
 
 	@Bean
 	public ModelMapper getModelMapper() { return new ModelMapper();	}
-
 }

@@ -9,5 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreateUserResponse {
     private int id;
-    private String name;
+    private String username;
+    private String firstName;
+    private String lastName;
+    private String dateOfBirth;
+    private String nationalIdentity;
+    private String email;
+    private String password;
 }

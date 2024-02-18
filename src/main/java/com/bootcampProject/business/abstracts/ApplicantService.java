@@ -4,7 +4,6 @@ import com.bootcampProject.business.requests.create.applicant.CreateApplicantReq
 import com.bootcampProject.business.responses.create.CreateApplicantResponse;
 import com.bootcampProject.business.responses.get.GetAllApplicantResponse;
 import com.bootcampProject.business.responses.get.GetApplicantResponse;
-
 import java.util.List;
 
 public interface ApplicantService {
