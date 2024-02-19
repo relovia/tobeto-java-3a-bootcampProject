@@ -1,4 +1,4 @@
-package com.bootcampProject.business.responses.create;
+package com.bootcampProject.business.responses.create.instructors;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

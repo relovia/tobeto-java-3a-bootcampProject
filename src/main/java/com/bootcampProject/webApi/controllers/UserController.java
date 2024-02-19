@@ -2,9 +2,9 @@ package com.bootcampProject.webApi.controllers;
 
 import com.bootcampProject.business.abstracts.UserService;
 import com.bootcampProject.business.requests.create.user.CreateUserRequest;
-import com.bootcampProject.business.responses.create.CreateUserResponse;
-import com.bootcampProject.business.responses.get.GetAllUserResponse;
-import com.bootcampProject.business.responses.get.GetUserResponse;
+import com.bootcampProject.business.responses.create.users.CreateUserResponse;
+import com.bootcampProject.business.responses.get.users.GetAllUserResponse;
+import com.bootcampProject.business.responses.get.users.GetUserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;

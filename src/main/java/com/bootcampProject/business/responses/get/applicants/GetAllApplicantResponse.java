@@ -1,4 +1,4 @@
-package com.bootcampProject.business.responses.get;
+package com.bootcampProject.business.responses.get.applicants;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

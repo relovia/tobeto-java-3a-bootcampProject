@@ -2,9 +2,9 @@ package com.bootcampProject.webApi.controllers;
 
 import com.bootcampProject.business.abstracts.InstructorService;
 import com.bootcampProject.business.requests.create.instructor.CreateInstructorRequest;
-import com.bootcampProject.business.responses.create.CreateInstructorResponse;
-import com.bootcampProject.business.responses.get.GetAllInstructorResponse;
-import com.bootcampProject.business.responses.get.GetInstructorResponse;
+import com.bootcampProject.business.responses.create.instructors.CreateInstructorResponse;
+import com.bootcampProject.business.responses.get.instructors.GetAllInstructorResponse;
+import com.bootcampProject.business.responses.get.instructors.GetInstructorResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;

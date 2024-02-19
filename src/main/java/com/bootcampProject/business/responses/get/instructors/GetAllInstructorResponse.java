@@ -1,4 +1,4 @@
-package com.bootcampProject.business.responses.get;
+package com.bootcampProject.business.responses.get.instructors;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

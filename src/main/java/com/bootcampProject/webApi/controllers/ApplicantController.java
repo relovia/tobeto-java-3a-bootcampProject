@@ -2,9 +2,9 @@ package com.bootcampProject.webApi.controllers;
 
 import com.bootcampProject.business.abstracts.ApplicantService;
 import com.bootcampProject.business.requests.create.applicant.CreateApplicantRequest;
-import com.bootcampProject.business.responses.create.CreateApplicantResponse;
-import com.bootcampProject.business.responses.get.GetAllApplicantResponse;
-import com.bootcampProject.business.responses.get.GetApplicantResponse;
+import com.bootcampProject.business.responses.create.applicants.CreateApplicantResponse;
+import com.bootcampProject.business.responses.get.applicants.GetAllApplicantResponse;
+import com.bootcampProject.business.responses.get.applicants.GetApplicantResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;

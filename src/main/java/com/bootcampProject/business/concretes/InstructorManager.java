@@ -2,9 +2,9 @@ package com.bootcampProject.business.concretes;
 
 import com.bootcampProject.business.abstracts.InstructorService;
 import com.bootcampProject.business.requests.create.instructor.CreateInstructorRequest;
-import com.bootcampProject.business.responses.create.CreateInstructorResponse;
-import com.bootcampProject.business.responses.get.GetAllInstructorResponse;
-import com.bootcampProject.business.responses.get.GetInstructorResponse;
+import com.bootcampProject.business.responses.create.instructors.CreateInstructorResponse;
+import com.bootcampProject.business.responses.get.instructors.GetAllInstructorResponse;
+import com.bootcampProject.business.responses.get.instructors.GetInstructorResponse;
 import com.bootcampProject.core.utilities.mapping.ModelMapperService;
 import com.bootcampProject.dataAccess.abstracts.InstructorRepository;
 import com.bootcampProject.entities.concretes.Instructor;

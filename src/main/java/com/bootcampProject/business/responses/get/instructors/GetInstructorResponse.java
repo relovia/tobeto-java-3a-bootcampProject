@@ -1,4 +1,4 @@
-package com.bootcampProject.business.responses.get;
+package com.bootcampProject.business.responses.get.instructors;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,9 +8,9 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetAllEmployeeResponse {
+public class GetInstructorResponse {
     private int id;
-    private String employeePosition;
+    private String instructorCompanyName;
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
     private LocalDateTime deletedDate;

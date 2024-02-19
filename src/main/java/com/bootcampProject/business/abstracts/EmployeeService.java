@@ -1,9 +1,9 @@
 package com.bootcampProject.business.abstracts;
 
 import com.bootcampProject.business.requests.create.employee.CreateEmployeeRequest;
-import com.bootcampProject.business.responses.create.CreateEmployeeResponse;
-import com.bootcampProject.business.responses.get.GetAllEmployeeResponse;
-import com.bootcampProject.business.responses.get.GetEmployeeResponse;
+import com.bootcampProject.business.responses.create.employees.CreateEmployeeResponse;
+import com.bootcampProject.business.responses.get.employees.GetAllEmployeeResponse;
+import com.bootcampProject.business.responses.get.employees.GetEmployeeResponse;
 import java.util.List;
 
 public interface EmployeeService {

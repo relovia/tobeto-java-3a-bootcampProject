@@ -1,9 +1,9 @@
 package com.bootcampProject.business.abstracts;
 
 import com.bootcampProject.business.requests.create.user.CreateUserRequest;
-import com.bootcampProject.business.responses.create.CreateUserResponse;
-import com.bootcampProject.business.responses.get.GetAllUserResponse;
-import com.bootcampProject.business.responses.get.GetUserResponse;
+import com.bootcampProject.business.responses.create.users.CreateUserResponse;
+import com.bootcampProject.business.responses.get.users.GetAllUserResponse;
+import com.bootcampProject.business.responses.get.users.GetUserResponse;
 import java.util.List;
 
 public interface UserService {
