@@ -12,8 +12,5 @@ public class CreateAllUserResponse {
     private String userName;
     private String firstName;
     private String lastName;
-    private String dateOfBirth;
-    private String nationalIdentity;
     private String email;
-    private String password;
 }
