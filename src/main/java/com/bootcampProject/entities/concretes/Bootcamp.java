@@ -1,5 +1,6 @@
 package com.bootcampProject.entities.concretes;
 
+import com.bootcampProject.core.entities.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +14,8 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name="bootcamps")
-public class Bootcamp {
+@PrimaryKeyJoinColumn(name = "user_id")
+public class Bootcamp extends BaseEntity<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
