@@ -13,11 +13,6 @@ import lombok.NoArgsConstructor;
 @Table(name="bootcamp_states")
 @PrimaryKeyJoinColumn(name = "user_id")
 public class BootcampState extends BaseEntity<Integer> {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
-
     @Column(name = "name")
     private String name;
 }

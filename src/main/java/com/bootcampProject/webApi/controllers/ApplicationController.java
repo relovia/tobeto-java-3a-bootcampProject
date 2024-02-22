@@ -31,13 +31,12 @@ public class ApplicationController extends BaseController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> updateApplications(@RequestBody CreateApplicationRequest request) {
+    public ResponseEntity<?> updateApplication(@RequestBody CreateApplicationRequest request) {
         return handleDataResult(applicationService.update(request));
     }
 
-    @DeleteMapping("delete/{id}")
-    public ResponseEntity<?> deleteApplications(@PathVariable int id) {
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteApplication(@PathVariable int id) {
         return handleDataResult(applicationService.delete(id));
     }
-
 }

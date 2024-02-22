@@ -16,11 +16,6 @@ import java.util.List;
 @Table(name="bootcamps")
 @PrimaryKeyJoinColumn(name = "user_id")
 public class Bootcamp extends BaseEntity<Integer> {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
-
     @Column(name = "name")
     private String name;
 

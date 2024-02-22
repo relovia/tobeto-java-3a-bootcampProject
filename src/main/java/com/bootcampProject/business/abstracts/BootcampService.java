@@ -1,11 +1,7 @@
 package com.bootcampProject.business.abstracts;
 
-import com.bootcampProject.business.requests.create.applicationState.CreateApplicationStateRequest;
 import com.bootcampProject.business.requests.create.bootcamp.CreateBootcampRequest;
-import com.bootcampProject.business.responses.create.applicationState.CreateApplicationStateResponse;
 import com.bootcampProject.business.responses.create.bootcamp.CreateBootcampResponse;
-import com.bootcampProject.business.responses.get.applicationState.GetAllApplicationStateResponse;
-import com.bootcampProject.business.responses.get.applicationState.GetApplicationStateResponse;
 import com.bootcampProject.business.responses.get.bootcamp.GetAllBootcampResponse;
 import com.bootcampProject.business.responses.get.bootcamp.GetBootcampResponse;
 import com.bootcampProject.core.utilities.results.DataResult;

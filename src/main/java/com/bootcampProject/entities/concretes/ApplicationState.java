@@ -13,11 +13,6 @@ import lombok.NoArgsConstructor;
 @Table(name="application_states")
 @PrimaryKeyJoinColumn(name = "user_id")
 public class ApplicationState extends BaseEntity<Integer> {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
-
     @Column(name = "name")
     private String name;
 }

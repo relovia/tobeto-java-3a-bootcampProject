@@ -2,13 +2,9 @@ package com.bootcampProject.webApi.controllers;
 
 import com.bootcampProject.business.abstracts.ApplicantService;
 import com.bootcampProject.business.requests.create.applicant.CreateApplicantRequest;
-import com.bootcampProject.business.responses.create.applicants.CreateApplicantResponse;
-import com.bootcampProject.business.responses.get.applicants.GetAllApplicantResponse;
-import com.bootcampProject.business.responses.get.applicants.GetApplicantResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/applicants")
@@ -40,7 +36,7 @@ public class ApplicantController extends BaseController {
         return handleDataResult(applicantService.update(request));
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteApplicant(@PathVariable int id) {
         return handleDataResult(applicantService.delete(id));
     }

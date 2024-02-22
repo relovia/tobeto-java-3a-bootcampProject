@@ -2,6 +2,7 @@ package com.bootcampProject.business.concretes;
 
 import com.bootcampProject.business.abstracts.BootcampStateService;
 import com.bootcampProject.business.constants.BootcampStateMessages;
+import com.bootcampProject.business.requests.create.bootcampState.CreateBootcampStateRequest;
 import com.bootcampProject.business.responses.create.bootcampState.CreateBootcampStateResponse;
 import com.bootcampProject.business.responses.get.bootcampState.GetAllBootcampStateResponse;
 import com.bootcampProject.business.responses.get.bootcampState.GetBootcampStateResponse;
@@ -29,7 +30,7 @@ public class BootcampStateManager implements BootcampStateService {
     }
 
     @Override
-    public DataResult<CreateBootcampStateResponse> add(CreateBootcampStateResponse request) {
+    public DataResult<CreateBootcampStateResponse> add(CreateBootcampStateRequest request) {
         BootcampState bootcampState = mapperService.forRequest().map(request, BootcampState.class);
         bootcampState.setCreatedDate(LocalDateTime.now());
         bootcampStateRepository.save(bootcampState);
@@ -46,7 +47,7 @@ public class BootcampStateManager implements BootcampStateService {
     }
 
     @Override
-    public DataResult<Void> update(CreateBootcampStateResponse request) {
+    public DataResult<Void> update(CreateBootcampStateRequest request) {
         int bootcampStateId = request.getId();
         BootcampState existingBootcampState = bootcampStateRepository.findById(bootcampStateId).orElse(null);
 

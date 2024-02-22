@@ -2,13 +2,9 @@ package com.bootcampProject.webApi.controllers;
 
 import com.bootcampProject.business.abstracts.EmployeeService;
 import com.bootcampProject.business.requests.create.employee.CreateEmployeeRequest;
-import com.bootcampProject.business.responses.create.employees.CreateEmployeeResponse;
-import com.bootcampProject.business.responses.get.employees.GetAllEmployeeResponse;
-import com.bootcampProject.business.responses.get.employees.GetEmployeeResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/employees")
