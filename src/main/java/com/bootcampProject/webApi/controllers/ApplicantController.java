@@ -6,12 +6,13 @@ import com.bootcampProject.business.responses.create.applicants.CreateApplicantR
 import com.bootcampProject.business.responses.get.applicants.GetAllApplicantResponse;
 import com.bootcampProject.business.responses.get.applicants.GetApplicantResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/applicants")
-public class ApplicantController {
+@RequestMapping("/api/applicants")
+public class ApplicantController extends BaseController {
     private final ApplicantService applicantService;
 
     @Autowired
@@ -20,27 +21,27 @@ public class ApplicantController {
     }
 
     @PostMapping("/add")
-    public CreateApplicantResponse addApplicant(@RequestBody CreateApplicantRequest request) {
-        return applicantService.add(request);
+    public ResponseEntity<?> addApplicant(@RequestBody CreateApplicantRequest request) {
+        return handleDataResult(applicantService.add(request));
     }
 
     @GetMapping("/get/{id}")
-    public GetApplicantResponse getApplicantById(@PathVariable int id) {
-        return applicantService.getById(id);
+    public ResponseEntity<?> getApplicantById(@PathVariable int id) {
+        return handleDataResult(applicantService.getById(id));
     }
 
     @GetMapping("/get/all")
-    public List<GetAllApplicantResponse> getAllApplicants() {
-        return applicantService.getAll();
+    public ResponseEntity<?> getAllApplicants() {
+        return handleDataResult(applicantService.getAll());
     }
 
     @PutMapping("/update")
-    public void updateApplicant(@RequestBody CreateApplicantRequest request) {
-        applicantService.update(request);
+    public ResponseEntity<?> updateApplicant(@RequestBody CreateApplicantRequest request) {
+        return handleDataResult(applicantService.update(request));
     }
 
     @DeleteMapping("delete/{id}")
-    public void deleteApplicant(@PathVariable int id) {
-        applicantService.delete(id);
+    public ResponseEntity<?> deleteApplicant(@PathVariable int id) {
+        return handleDataResult(applicantService.delete(id));
     }
 }

@@ -4,12 +4,14 @@ import com.bootcampProject.business.requests.create.applicant.CreateApplicantReq
 import com.bootcampProject.business.responses.create.applicants.CreateApplicantResponse;
 import com.bootcampProject.business.responses.get.applicants.GetAllApplicantResponse;
 import com.bootcampProject.business.responses.get.applicants.GetApplicantResponse;
+import com.bootcampProject.core.utilities.results.DataResult;
+
 import java.util.List;
 
 public interface ApplicantService {
-    CreateApplicantResponse add(CreateApplicantRequest request);
-    void delete(int id);
-    void update(CreateApplicantRequest request);
-    List<GetAllApplicantResponse> getAll();
-    GetApplicantResponse getById(int id);
+    DataResult<CreateApplicantResponse> add(CreateApplicantRequest request);
+    DataResult<Void> delete(int id);
+    DataResult<Void> update(CreateApplicantRequest request);
+    DataResult<List<GetAllApplicantResponse>> getAll();
+    DataResult<GetApplicantResponse> getById(int id);
 }

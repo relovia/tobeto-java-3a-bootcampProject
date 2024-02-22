@@ -4,12 +4,18 @@ import com.bootcampProject.business.requests.create.instructor.CreateInstructorR
 import com.bootcampProject.business.responses.create.instructors.CreateInstructorResponse;
 import com.bootcampProject.business.responses.get.instructors.GetAllInstructorResponse;
 import com.bootcampProject.business.responses.get.instructors.GetInstructorResponse;
+import com.bootcampProject.core.utilities.results.DataResult;
+
 import java.util.List;
 
 public interface InstructorService {
-    CreateInstructorResponse add(CreateInstructorRequest request);
-    void delete(int id);
-    void update(CreateInstructorRequest request);
-    List<GetAllInstructorResponse> getAll();
-    GetInstructorResponse getById(int id);
+    DataResult<CreateInstructorResponse> add(CreateInstructorRequest request);
+
+    DataResult<Void> delete(int id);
+
+    DataResult<Void> update(CreateInstructorRequest request);
+
+    DataResult<List<GetAllInstructorResponse>> getAll();
+
+    DataResult<GetInstructorResponse> getById(int id);
 }

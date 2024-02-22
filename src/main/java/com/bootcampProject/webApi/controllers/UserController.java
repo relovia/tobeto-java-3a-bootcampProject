@@ -6,12 +6,13 @@ import com.bootcampProject.business.responses.create.users.CreateUserResponse;
 import com.bootcampProject.business.responses.get.users.GetAllUserResponse;
 import com.bootcampProject.business.responses.get.users.GetUserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/api/users")
+public class UserController extends BaseController {
     private final UserService userService;
 
     @Autowired
@@ -20,27 +21,27 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public CreateUserResponse addUser(@RequestBody CreateUserRequest request) {
-        return userService.add(request);
+    public ResponseEntity<?> addUser(@RequestBody CreateUserRequest request) {
+        return handleDataResult(userService.add(request));
     }
 
     @GetMapping("/get/{id}")
-    public GetUserResponse getUserById(@PathVariable  int id) {
-        return userService.getById(id);
+    public ResponseEntity<?> getUserById(@PathVariable  int id) {
+        return handleDataResult(userService.getById(id));
     }
 
     @GetMapping("/get/all")
-    public List<GetAllUserResponse> getAllUsers() {
-        return userService.getAll();
+    public ResponseEntity<?> getAllUsers() {
+        return handleDataResult(userService.getAll());
     }
 
     @PutMapping("/update")
-    public void updateUser(@RequestBody CreateUserRequest request) {
-        userService.update(request);
+    public ResponseEntity<?> updateUser(@RequestBody CreateUserRequest request) {
+        return handleDataResult(userService.update(request));
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteUser(@PathVariable int id) {
-        userService.delete(id);
+    public ResponseEntity<?> deleteUser(@PathVariable int id) {
+        return handleDataResult(userService.delete(id));
     }
 }

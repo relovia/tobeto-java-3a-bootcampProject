@@ -4,13 +4,15 @@ import com.bootcampProject.business.requests.create.user.CreateUserRequest;
 import com.bootcampProject.business.responses.create.users.CreateUserResponse;
 import com.bootcampProject.business.responses.get.users.GetAllUserResponse;
 import com.bootcampProject.business.responses.get.users.GetUserResponse;
+import com.bootcampProject.core.utilities.results.DataResult;
+
 import java.util.List;
 
 public interface UserService {
-    CreateUserResponse add(CreateUserRequest request);
-    void delete(int id);
-    void update(CreateUserRequest request);
-    List<GetAllUserResponse> getAll();
-    GetUserResponse getById(int id);
-    GetUserResponse getByEmail(String email);
+    DataResult<CreateUserResponse> add(CreateUserRequest request);
+    DataResult<Void> delete(int id);
+    DataResult<Void> update(CreateUserRequest request);
+    DataResult<List<GetAllUserResponse>> getAll();
+    DataResult<GetUserResponse> getById(int id);
+    DataResult<GetUserResponse> getByEmail(String email);
 }

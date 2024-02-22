@@ -6,12 +6,13 @@ import com.bootcampProject.business.responses.create.employees.CreateEmployeeRes
 import com.bootcampProject.business.responses.get.employees.GetAllEmployeeResponse;
 import com.bootcampProject.business.responses.get.employees.GetEmployeeResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/employees")
-public class EmployeeController {
+@RequestMapping("/api/employees")
+public class EmployeeController extends BaseController {
     private final EmployeeService employeeService;
 
     @Autowired
@@ -20,27 +21,27 @@ public class EmployeeController {
     }
 
     @PostMapping("/add")
-    public CreateEmployeeResponse addEmployee(@RequestBody CreateEmployeeRequest request) {
-        return employeeService.add(request);
+    public ResponseEntity<?> addEmployee(@RequestBody CreateEmployeeRequest request) {
+        return handleDataResult(employeeService.add(request));
     }
 
     @GetMapping("/get/{id}")
-    public GetEmployeeResponse getEmployeeById(@PathVariable int id) {
-        return employeeService.getById(id);
+    public ResponseEntity<?> getEmployeeById(@PathVariable int id) {
+        return handleDataResult(employeeService.getById(id));
     }
 
     @GetMapping("/get/all")
-    public List<GetAllEmployeeResponse> getAllEmployees() {
-        return employeeService.getAll();
+    public ResponseEntity<?> getAllEmployees() {
+        return handleDataResult(employeeService.getAll());
     }
 
     @PutMapping("/update")
-    public void updateEmployee(@RequestBody CreateEmployeeRequest request) {
-        employeeService.update(request);
+    public ResponseEntity<?> updateEmployee(@RequestBody CreateEmployeeRequest request) {
+       return handleDataResult(employeeService.update(request));
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteEmployee(@PathVariable int id) {
-        employeeService.delete(id);
+    public ResponseEntity<?> deleteEmployee(@PathVariable int id) {
+        return handleDataResult(employeeService.delete(id));
     }
 }

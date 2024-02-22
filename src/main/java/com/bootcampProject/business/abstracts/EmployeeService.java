@@ -4,12 +4,14 @@ import com.bootcampProject.business.requests.create.employee.CreateEmployeeReque
 import com.bootcampProject.business.responses.create.employees.CreateEmployeeResponse;
 import com.bootcampProject.business.responses.get.employees.GetAllEmployeeResponse;
 import com.bootcampProject.business.responses.get.employees.GetEmployeeResponse;
+import com.bootcampProject.core.utilities.results.DataResult;
+
 import java.util.List;
 
 public interface EmployeeService {
-    CreateEmployeeResponse add(CreateEmployeeRequest request);
-    void delete(int id);
-    void update(CreateEmployeeRequest request);
-    List<GetAllEmployeeResponse> getAll();
-    GetEmployeeResponse getById(int id);
+    DataResult<CreateEmployeeResponse> add(CreateEmployeeRequest request);
+    DataResult<Void> delete(int id);
+    DataResult<Void> update(CreateEmployeeRequest request);
+    DataResult<List<GetAllEmployeeResponse>> getAll();
+    DataResult<GetEmployeeResponse> getById(int id);
 }
