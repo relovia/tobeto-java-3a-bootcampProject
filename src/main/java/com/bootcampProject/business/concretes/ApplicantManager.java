@@ -7,11 +7,16 @@ import com.bootcampProject.business.responses.create.applicants.CreateApplicantR
 import com.bootcampProject.business.responses.get.applicants.GetAllApplicantResponse;
 import com.bootcampProject.business.responses.get.applicants.GetApplicantResponse;
 import com.bootcampProject.core.utilities.mapping.ModelMapperService;
+import com.bootcampProject.core.utilities.paging.PageDto;
 import com.bootcampProject.core.utilities.results.DataResult;
 import com.bootcampProject.core.utilities.results.SuccessDataResult;
 import com.bootcampProject.dataAccess.abstracts.ApplicantRepository;
 import com.bootcampProject.entities.concretes.Applicant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -74,5 +79,16 @@ public class ApplicantManager implements ApplicantService {
         Applicant applicant = applicantRepository.getById(id);
         GetApplicantResponse response = mapperService.forResponse().map(applicant, GetApplicantResponse.class);
         return new SuccessDataResult<>(response, ApplicantMessages.applicantListed);
+    }
+
+    @Override
+    public DataResult<List<GetAllApplicantResponse>> getAllPage(PageDto pageDto) {
+        Sort sort = Sort.by(Sort.Direction.fromString(pageDto.getSortDirection()), pageDto.getSortBy());
+        Pageable pageable = PageRequest.of(pageDto.getPageNumber(), pageDto.getPageSize(), sort);
+        Page<Applicant> applicants = applicantRepository.findAll(pageable);
+        List<GetAllApplicantResponse> applicantsPage = applicants.stream()
+                .map(applicant -> mapperService.forResponse().map(applicant, GetAllApplicantResponse.class))
+                .collect(Collectors.toList());
+        return new SuccessDataResult<>(applicantsPage);
     }
 }

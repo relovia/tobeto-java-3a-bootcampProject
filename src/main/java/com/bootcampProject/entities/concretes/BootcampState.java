@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name="bootcamp_states")
-@PrimaryKeyJoinColumn(name = "user_id")
 public class BootcampState extends BaseEntity<Integer> {
     @Column(name = "name")
     private String name;

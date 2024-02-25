@@ -7,11 +7,16 @@ import com.bootcampProject.business.responses.create.employees.CreateEmployeeRes
 import com.bootcampProject.business.responses.get.employees.GetAllEmployeeResponse;
 import com.bootcampProject.business.responses.get.employees.GetEmployeeResponse;
 import com.bootcampProject.core.utilities.mapping.ModelMapperService;
+import com.bootcampProject.core.utilities.paging.PageDto;
 import com.bootcampProject.core.utilities.results.DataResult;
 import com.bootcampProject.core.utilities.results.SuccessDataResult;
 import com.bootcampProject.dataAccess.abstracts.EmployeeRepository;
 import com.bootcampProject.entities.concretes.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -74,5 +79,16 @@ public class EmployeeManager implements EmployeeService {
         Employee employee = employeeRepository.getById(id);
         GetEmployeeResponse response = mapperService.forResponse().map(employee, GetEmployeeResponse.class);
         return new SuccessDataResult<>(response, EmployeeMessages.employeeListed);
+    }
+
+    @Override
+    public DataResult<List<GetAllEmployeeResponse>> getAllPage(PageDto pageDto) {
+        Sort sort = Sort.by(Sort.Direction.fromString(pageDto.getSortDirection()), pageDto.getSortBy());
+        Pageable pageable = PageRequest.of(pageDto.getPageNumber(), pageDto.getPageSize(), sort);
+        Page<Employee> employees = employeeRepository.findAll(pageable);
+        List<GetAllEmployeeResponse> employeePages = employees.stream()
+                .map(employee -> mapperService.forResponse().map(employees, GetAllEmployeeResponse.class))
+                .collect(Collectors.toList());
+        return new SuccessDataResult<>(employeePages, EmployeeMessages.employeesListed);
     }
 }

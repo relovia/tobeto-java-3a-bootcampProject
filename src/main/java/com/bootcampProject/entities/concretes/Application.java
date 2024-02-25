@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name="applications")
-@PrimaryKeyJoinColumn(name = "user_id")
 public class Application extends BaseEntity<Integer> {
     @ManyToOne
     @JoinColumn(name = "applicant_id")

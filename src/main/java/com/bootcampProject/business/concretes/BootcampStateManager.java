@@ -7,11 +7,16 @@ import com.bootcampProject.business.responses.create.bootcampState.CreateBootcam
 import com.bootcampProject.business.responses.get.bootcampState.GetAllBootcampStateResponse;
 import com.bootcampProject.business.responses.get.bootcampState.GetBootcampStateResponse;
 import com.bootcampProject.core.utilities.mapping.ModelMapperService;
+import com.bootcampProject.core.utilities.paging.PageDto;
 import com.bootcampProject.core.utilities.results.DataResult;
 import com.bootcampProject.core.utilities.results.SuccessDataResult;
 import com.bootcampProject.dataAccess.abstracts.BootcampStateRepository;
 import com.bootcampProject.entities.concretes.BootcampState;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -74,5 +79,16 @@ public class BootcampStateManager implements BootcampStateService {
         BootcampState bootcampState = bootcampStateRepository.getById(id);
         GetBootcampStateResponse response = mapperService.forResponse().map(bootcampState, GetBootcampStateResponse.class);
         return new SuccessDataResult<>(response, BootcampStateMessages.bootcampStateListed);
+    }
+
+    @Override
+    public DataResult<List<GetAllBootcampStateResponse>> getAllPage(PageDto pageDto) {
+        Sort sort = Sort.by(Sort.Direction.fromString(pageDto.getSortDirection()), pageDto.getSortBy());
+        Pageable pageable = PageRequest.of(pageDto.getPageNumber(), pageDto.getPageSize(), sort);
+        Page<BootcampState> bootcampStates = bootcampStateRepository.findAll(pageable);
+        List<GetAllBootcampStateResponse> bootcampStatePages = bootcampStates.stream()
+                .map(bootcamp -> mapperService.forResponse().map(bootcampStates, GetAllBootcampStateResponse.class))
+                .collect(Collectors.toList());
+        return new SuccessDataResult<>(bootcampStatePages, BootcampStateMessages.bootcampStatesListed);
     }
 }

@@ -7,11 +7,16 @@ import com.bootcampProject.business.responses.create.applicationState.CreateAppl
 import com.bootcampProject.business.responses.get.applicationState.GetAllApplicationStateResponse;
 import com.bootcampProject.business.responses.get.applicationState.GetApplicationStateResponse;
 import com.bootcampProject.core.utilities.mapping.ModelMapperService;
+import com.bootcampProject.core.utilities.paging.PageDto;
 import com.bootcampProject.core.utilities.results.DataResult;
 import com.bootcampProject.core.utilities.results.SuccessDataResult;
 import com.bootcampProject.dataAccess.abstracts.ApplicationStateRepository;
 import com.bootcampProject.entities.concretes.ApplicationState;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -74,5 +79,16 @@ public class ApplicationStateManager implements ApplicationStateService {
         ApplicationState applicationState = applicationStateRepository.getById(id);
         GetApplicationStateResponse response = mapperService.forResponse().map(applicationState, GetApplicationStateResponse.class);
         return new SuccessDataResult<>(response, ApplicationStateMessages.applicationStateListed);
+    }
+
+    @Override
+    public DataResult<List<GetAllApplicationStateResponse>> getAllPage(PageDto pageDto) {
+        Sort sort = Sort.by(Sort.Direction.fromString(pageDto.getSortDirection()), pageDto.getSortBy());
+        Pageable pageable = PageRequest.of(pageDto.getPageNumber(), pageDto.getPageSize(), sort);
+        Page<ApplicationState> applicationStates = applicationStateRepository.findAll(pageable);
+        List<GetAllApplicationStateResponse> applicationStatePages = applicationStates.stream()
+                .map(applicationState -> mapperService.forResponse().map(applicationState, GetAllApplicationStateResponse.class))
+                .collect(Collectors.toList());
+        return new SuccessDataResult<>(applicationStatePages, ApplicationStateMessages.applicationStatesListed);
     }
 }

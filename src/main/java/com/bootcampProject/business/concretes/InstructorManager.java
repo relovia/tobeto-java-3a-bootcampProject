@@ -7,11 +7,16 @@ import com.bootcampProject.business.responses.create.instructors.CreateInstructo
 import com.bootcampProject.business.responses.get.instructors.GetAllInstructorResponse;
 import com.bootcampProject.business.responses.get.instructors.GetInstructorResponse;
 import com.bootcampProject.core.utilities.mapping.ModelMapperService;
+import com.bootcampProject.core.utilities.paging.PageDto;
 import com.bootcampProject.core.utilities.results.DataResult;
 import com.bootcampProject.core.utilities.results.SuccessDataResult;
 import com.bootcampProject.dataAccess.abstracts.InstructorRepository;
 import com.bootcampProject.entities.concretes.Instructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -76,5 +81,16 @@ public class InstructorManager implements InstructorService {
         Instructor instructor = instructorRepository.getById(id);
         GetInstructorResponse response = mapperService.forResponse().map(instructor,GetInstructorResponse.class);
         return new SuccessDataResult<>(response, InstructorMessages.instructorListed);
+    }
+
+    @Override
+    public DataResult<List<GetAllInstructorResponse>> getAllPage(PageDto pageDto) {
+        Sort sort = Sort.by(Sort.Direction.fromString(pageDto.getSortDirection()), pageDto.getSortBy());
+        Pageable pageable = PageRequest.of(pageDto.getPageNumber(), pageDto.getPageSize(), sort);
+        Page<Instructor> instructors = instructorRepository.findAll(pageable);
+        List<GetAllInstructorResponse> instructorPages = instructors.stream()
+                .map(instructor -> mapperService.forResponse().map(instructors, GetAllInstructorResponse.class))
+                .collect(Collectors.toList());
+        return new SuccessDataResult<>(instructorPages, InstructorMessages.instructorsListed);
     }
 }

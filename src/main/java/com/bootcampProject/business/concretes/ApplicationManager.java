@@ -7,11 +7,16 @@ import com.bootcampProject.business.responses.create.application.CreateApplicati
 import com.bootcampProject.business.responses.get.application.GetAllApplicationResponse;
 import com.bootcampProject.business.responses.get.application.GetApplicationResponse;
 import com.bootcampProject.core.utilities.mapping.ModelMapperService;
+import com.bootcampProject.core.utilities.paging.PageDto;
 import com.bootcampProject.core.utilities.results.DataResult;
 import com.bootcampProject.core.utilities.results.SuccessDataResult;
 import com.bootcampProject.dataAccess.abstracts.ApplicationRepository;
 import com.bootcampProject.entities.concretes.Application;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -75,4 +80,16 @@ public class ApplicationManager implements ApplicationService {
         GetApplicationResponse response = mapperService.forResponse().map(application, GetApplicationResponse.class);
         return new SuccessDataResult<>(response, ApplicationMessages.applicationListed);
     }
+
+    @Override
+    public DataResult<List<GetAllApplicationResponse>> getAllPage(PageDto pageDto) {
+        Sort sort = Sort.by(Sort.Direction.fromString(pageDto.getSortDirection()), pageDto.getSortBy());
+        Pageable pageable = PageRequest.of(pageDto.getPageNumber(), pageDto.getPageSize(), sort);
+        Page<Application> applications = applicationRepository.findAll(pageable);
+        List<GetAllApplicationResponse> applicationsPage = applications.stream()
+                .map(application -> mapperService.forResponse().map(application, GetAllApplicationResponse.class))
+                .collect(Collectors.toList());
+        return new SuccessDataResult<>(applicationsPage, ApplicationMessages.applicationsListed);
+    }
+
 }

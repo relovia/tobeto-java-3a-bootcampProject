@@ -2,6 +2,7 @@ package com.bootcampProject.webApi.controllers;
 
 import com.bootcampProject.business.abstracts.EmployeeService;
 import com.bootcampProject.business.requests.create.employee.CreateEmployeeRequest;
+import com.bootcampProject.core.utilities.paging.PageDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,5 +40,9 @@ public class EmployeeController extends BaseController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable int id) {
         return handleDataResult(employeeService.delete(id));
+    }
+    @GetMapping("/sort")
+    public ResponseEntity<?> getAllPage(@RequestBody PageDto pageDto) {
+        return handleResult(employeeService.getAllPage(pageDto));
     }
 }

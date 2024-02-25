@@ -2,6 +2,7 @@ package com.bootcampProject.webApi.controllers;
 
 import com.bootcampProject.business.abstracts.InstructorService;
 import com.bootcampProject.business.requests.create.instructor.CreateInstructorRequest;
+import com.bootcampProject.core.utilities.paging.PageDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,5 +40,9 @@ public class InstructorController extends BaseController {
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteInstructor(@PathVariable int id) {
         return handleDataResult(instructorService.delete(id));
+    }
+    @GetMapping("/sort")
+    public ResponseEntity<?> getAllPage(@RequestBody PageDto pageDto) {
+        return handleResult(instructorService.getAllPage(pageDto));
     }
 }

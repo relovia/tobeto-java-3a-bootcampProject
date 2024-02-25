@@ -14,7 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name="bootcamps")
-@PrimaryKeyJoinColumn(name = "user_id")
 public class Bootcamp extends BaseEntity<Integer> {
     @Column(name = "name")
     private String name;

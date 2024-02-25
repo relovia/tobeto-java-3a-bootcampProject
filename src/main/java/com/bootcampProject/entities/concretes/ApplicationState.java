@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name="application_states")
-@PrimaryKeyJoinColumn(name = "user_id")
 public class ApplicationState extends BaseEntity<Integer> {
     @Column(name = "name")
     private String name;
