@@ -6,13 +6,14 @@ import com.bootcampProject.business.responses.get.applicationState.GetAllApplica
 import com.bootcampProject.business.responses.get.applicationState.GetApplicationStateResponse;
 import com.bootcampProject.core.utilities.paging.PageDto;
 import com.bootcampProject.core.utilities.results.DataResult;
+import com.bootcampProject.core.utilities.results.Result;
 
 import java.util.List;
 
 public interface ApplicationStateService {
     DataResult<CreateApplicationStateResponse> add(CreateApplicationStateRequest request);
-    DataResult<Void> delete(int id);
-    DataResult<Void> update(CreateApplicationStateRequest request);
+    Result delete(int id);
+    Result update(CreateApplicationStateRequest request);
     DataResult<List<GetAllApplicationStateResponse>> getAll();
     DataResult<GetApplicationStateResponse> getById(int id);
     DataResult<List<GetAllApplicationStateResponse>> getAllPage(PageDto pageDto);

@@ -9,7 +9,9 @@ import com.bootcampProject.business.responses.get.bootcamp.GetBootcampResponse;
 import com.bootcampProject.core.utilities.mapping.ModelMapperService;
 import com.bootcampProject.core.utilities.paging.PageDto;
 import com.bootcampProject.core.utilities.results.DataResult;
+import com.bootcampProject.core.utilities.results.Result;
 import com.bootcampProject.core.utilities.results.SuccessDataResult;
+import com.bootcampProject.core.utilities.results.SuccessResult;
 import com.bootcampProject.dataAccess.abstracts.BootcampRepository;
 import com.bootcampProject.entities.concretes.Bootcamp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,13 +48,13 @@ public class BootcampManager implements BootcampService {
     }
 
     @Override
-    public DataResult<Void> delete(int id) {
+    public Result delete(int id) {
         bootcampRepository.deleteById(id);
-        return new SuccessDataResult<>(null, BootcampMessages.bootcampDeleted);
+        return new SuccessResult(BootcampMessages.bootcampDeleted);
     }
 
     @Override
-    public DataResult<Void> update(CreateBootcampRequest request) {
+    public Result update(CreateBootcampRequest request) {
         int bootcampId = request.getId();
         Bootcamp existingBootcamp = bootcampRepository.findById(bootcampId).orElse(null);
 
@@ -62,7 +64,7 @@ public class BootcampManager implements BootcampService {
         }
         mapperService.forRequest().map(request, existingBootcamp);
         bootcampRepository.save(existingBootcamp);
-        return new SuccessDataResult<>(null, BootcampMessages.bootcampUpdated);
+        return new SuccessResult(BootcampMessages.bootcampUpdated);
     }
 
     @Override

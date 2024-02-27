@@ -34,12 +34,12 @@ public class InstructorController extends BaseController {
 
     @PutMapping("/update")
     public ResponseEntity<?> updateInstructor(@RequestBody CreateInstructorRequest request) {
-        return handleDataResult(instructorService.update(request));
+        return handleResult(instructorService.update(request));
     }
 
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteInstructor(@PathVariable int id) {
-        return handleDataResult(instructorService.delete(id));
+        return handleResult(instructorService.delete(id));
     }
     @GetMapping("/sort")
     public ResponseEntity<?> getAllPage(@RequestBody PageDto pageDto) {

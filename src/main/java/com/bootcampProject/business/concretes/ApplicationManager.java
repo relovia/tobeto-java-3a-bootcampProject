@@ -9,7 +9,9 @@ import com.bootcampProject.business.responses.get.application.GetApplicationResp
 import com.bootcampProject.core.utilities.mapping.ModelMapperService;
 import com.bootcampProject.core.utilities.paging.PageDto;
 import com.bootcampProject.core.utilities.results.DataResult;
+import com.bootcampProject.core.utilities.results.Result;
 import com.bootcampProject.core.utilities.results.SuccessDataResult;
+import com.bootcampProject.core.utilities.results.SuccessResult;
 import com.bootcampProject.dataAccess.abstracts.ApplicationRepository;
 import com.bootcampProject.entities.concretes.Application;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,9 +48,9 @@ public class ApplicationManager implements ApplicationService {
     }
 
     @Override
-    public DataResult<Void> delete(int id) {
+    public Result delete(int id) {
         applicationRepository.deleteById(id);
-        return new SuccessDataResult<>(null,ApplicationMessages.applicationDeleted);
+        return new SuccessResult(ApplicationMessages.applicationDeleted);
     }
 
     @Override

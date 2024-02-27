@@ -9,7 +9,9 @@ import com.bootcampProject.business.responses.get.instructors.GetInstructorRespo
 import com.bootcampProject.core.utilities.mapping.ModelMapperService;
 import com.bootcampProject.core.utilities.paging.PageDto;
 import com.bootcampProject.core.utilities.results.DataResult;
+import com.bootcampProject.core.utilities.results.Result;
 import com.bootcampProject.core.utilities.results.SuccessDataResult;
+import com.bootcampProject.core.utilities.results.SuccessResult;
 import com.bootcampProject.dataAccess.abstracts.InstructorRepository;
 import com.bootcampProject.entities.concretes.Instructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,13 +48,13 @@ public class InstructorManager implements InstructorService {
     }
 
     @Override
-    public DataResult<Void> delete(int id) {
+    public Result delete(int id) {
         instructorRepository.deleteById(id);
-        return new SuccessDataResult<>(null, InstructorMessages.instructorDeleted);
+        return new SuccessResult(InstructorMessages.instructorDeleted);
     }
 
     @Override
-    public DataResult<Void> update(CreateInstructorRequest request) {
+    public Result update(CreateInstructorRequest request) {
         int instructorId = request.getId();
         Instructor existingInstructor = instructorRepository.findById(instructorId).orElse(null);
 
@@ -64,7 +66,7 @@ public class InstructorManager implements InstructorService {
         mapperService.forRequest().map(request, existingInstructor);
         instructorRepository.save(existingInstructor);
 
-        return new SuccessDataResult<>(null, InstructorMessages.instructorUpdated);
+        return new SuccessResult(InstructorMessages.instructorUpdated);
     }
 
     @Override

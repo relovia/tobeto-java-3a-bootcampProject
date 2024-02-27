@@ -1,7 +1,6 @@
 package com.bootcampProject.webApi.controllers;
 
 import com.bootcampProject.business.abstracts.UserService;
-import com.bootcampProject.business.requests.create.user.CreateUserRequest;
 import com.bootcampProject.core.utilities.paging.PageDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,30 +16,16 @@ public class UserController extends BaseController {
         this.userService = userService;
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<?> addUser(@RequestBody CreateUserRequest request) {
-        return handleDataResult(userService.add(request));
-    }
-
-    @GetMapping("/get/{id}")
-    public ResponseEntity<?> getUserById(@PathVariable  int id) {
-        return handleDataResult(userService.getById(id));
-    }
-
     @GetMapping("/get/all")
     public ResponseEntity<?> getAllUsers() {
         return handleDataResult(userService.getAll());
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<?> updateUser(@RequestBody CreateUserRequest request) {
-        return handleDataResult(userService.update(request));
+    @GetMapping("/get/user/email/{email}")
+    public ResponseEntity<?> getUserEmail(@PathVariable String email) {
+        return handleDataResult(userService.getByEmail(email));
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable int id) {
-        return handleDataResult(userService.delete(id));
-    }
     @GetMapping("/sort")
     public ResponseEntity<?> getAllPage(@RequestBody PageDto pageDto) {
         return handleResult(userService.getAllPage(pageDto));

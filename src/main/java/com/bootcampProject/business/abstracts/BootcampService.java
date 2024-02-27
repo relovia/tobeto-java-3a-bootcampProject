@@ -6,13 +6,14 @@ import com.bootcampProject.business.responses.get.bootcamp.GetAllBootcampRespons
 import com.bootcampProject.business.responses.get.bootcamp.GetBootcampResponse;
 import com.bootcampProject.core.utilities.paging.PageDto;
 import com.bootcampProject.core.utilities.results.DataResult;
+import com.bootcampProject.core.utilities.results.Result;
 
 import java.util.List;
 
 public interface BootcampService {
     DataResult<CreateBootcampResponse> add(CreateBootcampRequest request);
-    DataResult<Void> delete(int id);
-    DataResult<Void> update(CreateBootcampRequest request);
+    Result delete(int id);
+    Result update(CreateBootcampRequest request);
     DataResult<List<GetAllBootcampResponse>> getAll();
     DataResult<GetBootcampResponse> getById(int id);
     DataResult<List<GetAllBootcampResponse>> getAllPage(PageDto pageDto);

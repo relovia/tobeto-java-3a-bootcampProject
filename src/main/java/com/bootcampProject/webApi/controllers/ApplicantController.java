@@ -34,12 +34,12 @@ public class ApplicantController extends BaseController {
 
     @PutMapping("/update")
     public ResponseEntity<?> updateApplicant(@RequestBody CreateApplicantRequest request) {
-        return handleDataResult(applicantService.update(request));
+        return handleResult(applicantService.update(request));
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteApplicant(@PathVariable int id) {
-        return handleDataResult(applicantService.delete(id));
+        return handleResult(applicantService.delete(id));
     }
     @GetMapping("/sort")
     public ResponseEntity<?> getAllPage(@RequestBody PageDto pageDto) {

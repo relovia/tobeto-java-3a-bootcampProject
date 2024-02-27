@@ -34,12 +34,12 @@ public class BootcampStateController extends BaseController {
 
     @PutMapping("/update")
     public ResponseEntity<?> updateBootcampState(@RequestBody CreateBootcampStateRequest request) {
-        return handleDataResult(bootcampStateService.update(request));
+        return handleResult(bootcampStateService.update(request));
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteBootcampState(@PathVariable int id) {
-        return handleDataResult(bootcampStateService.delete(id));
+        return handleResult(bootcampStateService.delete(id));
     }
     @GetMapping("/sort")
     public ResponseEntity<?> getAllPage(@RequestBody PageDto pageDto) {

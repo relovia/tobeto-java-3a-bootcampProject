@@ -9,7 +9,9 @@ import com.bootcampProject.business.responses.get.applicationState.GetApplicatio
 import com.bootcampProject.core.utilities.mapping.ModelMapperService;
 import com.bootcampProject.core.utilities.paging.PageDto;
 import com.bootcampProject.core.utilities.results.DataResult;
+import com.bootcampProject.core.utilities.results.Result;
 import com.bootcampProject.core.utilities.results.SuccessDataResult;
+import com.bootcampProject.core.utilities.results.SuccessResult;
 import com.bootcampProject.dataAccess.abstracts.ApplicationStateRepository;
 import com.bootcampProject.entities.concretes.ApplicationState;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,13 +48,13 @@ public class ApplicationStateManager implements ApplicationStateService {
     }
 
     @Override
-    public DataResult<Void> delete(int id) {
+    public Result delete(int id) {
         applicationStateRepository.deleteById(id);
-        return new SuccessDataResult<>(null, ApplicationStateMessages.applicationStateDeleted);
+        return new SuccessResult(ApplicationStateMessages.applicationStateDeleted);
     }
 
     @Override
-    public DataResult<Void> update(CreateApplicationStateRequest request) {
+    public Result update(CreateApplicationStateRequest request) {
         int applicationStateId = request.getId();
         ApplicationState existingApplicationState = applicationStateRepository.findById(applicationStateId).orElse(null);
 
@@ -62,7 +64,7 @@ public class ApplicationStateManager implements ApplicationStateService {
         }
         mapperService.forRequest().map(request, existingApplicationState);
         applicationStateRepository.save(existingApplicationState);
-        return new SuccessDataResult<>(null, ApplicationStateMessages.applicationStateUpdated);
+        return new SuccessResult(ApplicationStateMessages.applicationStateUpdated);
     }
 
     @Override

@@ -34,12 +34,12 @@ public class EmployeeController extends BaseController {
 
     @PutMapping("/update")
     public ResponseEntity<?> updateEmployee(@RequestBody CreateEmployeeRequest request) {
-       return handleDataResult(employeeService.update(request));
+       return handleResult(employeeService.update(request));
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable int id) {
-        return handleDataResult(employeeService.delete(id));
+        return handleResult(employeeService.delete(id));
     }
     @GetMapping("/sort")
     public ResponseEntity<?> getAllPage(@RequestBody PageDto pageDto) {

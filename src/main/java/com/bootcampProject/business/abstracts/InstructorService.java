@@ -6,18 +6,15 @@ import com.bootcampProject.business.responses.get.instructors.GetAllInstructorRe
 import com.bootcampProject.business.responses.get.instructors.GetInstructorResponse;
 import com.bootcampProject.core.utilities.paging.PageDto;
 import com.bootcampProject.core.utilities.results.DataResult;
+import com.bootcampProject.core.utilities.results.Result;
 
 import java.util.List;
 
 public interface InstructorService {
     DataResult<CreateInstructorResponse> add(CreateInstructorRequest request);
-
-    DataResult<Void> delete(int id);
-
-    DataResult<Void> update(CreateInstructorRequest request);
-
+    Result delete(int id);
+    Result update(CreateInstructorRequest request);
     DataResult<List<GetAllInstructorResponse>> getAll();
-
     DataResult<GetInstructorResponse> getById(int id);
     DataResult<List<GetAllInstructorResponse>> getAllPage(PageDto pageDto);
 

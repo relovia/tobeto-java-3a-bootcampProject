@@ -33,12 +33,12 @@ public class ApplicationController extends BaseController {
 
     @PutMapping("/update")
     public ResponseEntity<?> updateApplication(@RequestBody CreateApplicationRequest request) {
-        return handleDataResult(applicationService.update(request));
+        return handleResult(applicationService.update(request));
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteApplication(@PathVariable int id) {
-        return handleDataResult(applicationService.delete(id));
+        return handleResult(applicationService.delete(id));
     }
     @GetMapping("/sort")
     public ResponseEntity<?> getAllPage(@RequestBody PageDto pageDto) {

@@ -9,7 +9,9 @@ import com.bootcampProject.business.responses.get.employees.GetEmployeeResponse;
 import com.bootcampProject.core.utilities.mapping.ModelMapperService;
 import com.bootcampProject.core.utilities.paging.PageDto;
 import com.bootcampProject.core.utilities.results.DataResult;
+import com.bootcampProject.core.utilities.results.Result;
 import com.bootcampProject.core.utilities.results.SuccessDataResult;
+import com.bootcampProject.core.utilities.results.SuccessResult;
 import com.bootcampProject.dataAccess.abstracts.EmployeeRepository;
 import com.bootcampProject.entities.concretes.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,13 +49,13 @@ public class EmployeeManager implements EmployeeService {
     }
 
     @Override
-    public DataResult<Void> delete(int id) {
+    public Result delete(int id) {
         employeeRepository.deleteById(id);
-        return new SuccessDataResult<>(null, EmployeeMessages.employeeDeleted);
+        return new SuccessResult(EmployeeMessages.employeeDeleted);
     }
 
     @Override
-    public DataResult<Void> update(CreateEmployeeRequest request) {
+    public Result update(CreateEmployeeRequest request) {
         int employeeId = request.getId();
         Employee existingEmployee = employeeRepository.findById(employeeId).orElse(null);
 
@@ -63,7 +65,7 @@ public class EmployeeManager implements EmployeeService {
         }
         mapperService.forRequest().map(request, existingEmployee);
         employeeRepository.save(existingEmployee);
-        return new SuccessDataResult<>(null, EmployeeMessages.employeeUpdated);
+        return new SuccessResult(EmployeeMessages.employeeUpdated);
     }
     @Override
     public DataResult<List<GetAllEmployeeResponse>> getAll() {

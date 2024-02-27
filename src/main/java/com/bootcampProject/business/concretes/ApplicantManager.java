@@ -9,7 +9,9 @@ import com.bootcampProject.business.responses.get.applicants.GetApplicantRespons
 import com.bootcampProject.core.utilities.mapping.ModelMapperService;
 import com.bootcampProject.core.utilities.paging.PageDto;
 import com.bootcampProject.core.utilities.results.DataResult;
+import com.bootcampProject.core.utilities.results.Result;
 import com.bootcampProject.core.utilities.results.SuccessDataResult;
+import com.bootcampProject.core.utilities.results.SuccessResult;
 import com.bootcampProject.dataAccess.abstracts.ApplicantRepository;
 import com.bootcampProject.entities.concretes.Applicant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,13 +48,13 @@ public class ApplicantManager implements ApplicantService {
     }
 
     @Override
-    public DataResult<Void> delete(int id) {
+    public Result delete(int id) {
         applicantRepository.deleteById(id);
-        return new SuccessDataResult<>(null, ApplicantMessages.applicantDeleted);
+        return new SuccessResult(ApplicantMessages.applicantDeleted);
     }
 
     @Override
-    public DataResult<Void> update(CreateApplicantRequest request) {
+    public Result update(CreateApplicantRequest request) {
         int applicantId = request.getId();
         Applicant existingApplicant = applicantRepository.findById(applicantId).orElse(null);
 
@@ -62,7 +64,7 @@ public class ApplicantManager implements ApplicantService {
         }
         mapperService.forRequest().map(request, existingApplicant);
         applicantRepository.save(existingApplicant);
-        return new SuccessDataResult<>(null, ApplicantMessages.applicantUpdated);
+        return new SuccessResult(ApplicantMessages.applicantUpdated);
     }
 
     @Override
