@@ -20,7 +20,7 @@ public class Bootcamp extends BaseEntity<Integer> {
 
     @ManyToOne
     @JoinColumn(name = "instructor_id")
-    private User instructor;
+    private Instructor instructor;
 
     @Column(name = "startDate")
     private LocalDateTime startDate;

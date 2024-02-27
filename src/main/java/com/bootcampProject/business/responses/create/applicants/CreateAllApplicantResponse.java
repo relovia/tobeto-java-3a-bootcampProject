@@ -11,6 +11,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class CreateAllApplicantResponse {
     private int id;
+    private String firstName;
+    private String lastName;
+    private String username;
     private String about;
     private LocalDateTime createdDate;
 }

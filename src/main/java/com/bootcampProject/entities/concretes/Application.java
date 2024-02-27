@@ -1,7 +1,10 @@
 package com.bootcampProject.entities.concretes;
 
 import com.bootcampProject.core.entities.BaseEntity;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class Application extends BaseEntity<Integer> {
     @ManyToOne
     @JoinColumn(name = "applicant_id")
-    private User applicant;
+    private Applicant applicant;
 
     @ManyToOne
     @JoinColumn(name = "bootcamp_id")

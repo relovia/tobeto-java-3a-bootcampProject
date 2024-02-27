@@ -11,6 +11,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class CreateAllInstructorResponse {
     private int id;
+    private String firstName;
+    private String lastName;
+    private String username;
     private String companyName;
     private LocalDateTime createdDate;
 }

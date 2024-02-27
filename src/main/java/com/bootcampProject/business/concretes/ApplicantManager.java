@@ -1,11 +1,13 @@
 package com.bootcampProject.business.concretes;
 
 import com.bootcampProject.business.abstracts.ApplicantService;
+import com.bootcampProject.business.abstracts.BaseService;
 import com.bootcampProject.business.constants.ApplicantMessages;
 import com.bootcampProject.business.requests.create.applicant.CreateApplicantRequest;
 import com.bootcampProject.business.responses.create.applicants.CreateApplicantResponse;
 import com.bootcampProject.business.responses.get.applicants.GetAllApplicantResponse;
 import com.bootcampProject.business.responses.get.applicants.GetApplicantResponse;
+import com.bootcampProject.core.exceptions.types.BusinessException;
 import com.bootcampProject.core.utilities.mapping.ModelMapperService;
 import com.bootcampProject.core.utilities.paging.PageDto;
 import com.bootcampProject.core.utilities.results.DataResult;
@@ -14,6 +16,7 @@ import com.bootcampProject.core.utilities.results.SuccessDataResult;
 import com.bootcampProject.core.utilities.results.SuccessResult;
 import com.bootcampProject.dataAccess.abstracts.ApplicantRepository;
 import com.bootcampProject.entities.concretes.Applicant;
+import com.bootcampProject.entities.concretes.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,7 +29,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ApplicantManager implements ApplicantService {
+public class ApplicantManager implements ApplicantService, BaseService {
     private final ApplicantRepository applicantRepository;
     private final ModelMapperService mapperService;
 
@@ -38,6 +41,8 @@ public class ApplicantManager implements ApplicantService {
 
     @Override
     public DataResult<CreateApplicantResponse> add(CreateApplicantRequest request) {
+        checkIfUserExists(request.getEmail());
+        checkIfUsernameExists(request.getUsername());
         Applicant applicant = mapperService.forRequest().map(request, Applicant.class);
         applicant.setCreatedDate(LocalDateTime.now());
         applicantRepository.save(applicant);
@@ -92,5 +97,21 @@ public class ApplicantManager implements ApplicantService {
                 .map(applicant -> mapperService.forResponse().map(applicant, GetAllApplicantResponse.class))
                 .collect(Collectors.toList());
         return new SuccessDataResult<>(applicantsPage);
+    }
+
+    @Override
+    public void checkIfUserExists(String email) {
+        User applicant = applicantRepository.getByEmail(email.trim());
+        if (applicant != null) {
+            throw new BusinessException("Applicant email already exists!");
+        }
+    }
+
+    @Override
+    public void checkIfUsernameExists(String username) {
+        User applicant = applicantRepository.getByUsername(username.trim());
+        if (applicant != null) {
+            throw new BusinessException("Applicant username already exists");
+        }
     }
 }

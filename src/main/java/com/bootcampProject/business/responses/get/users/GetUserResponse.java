@@ -11,14 +11,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class GetUserResponse {
     private int id;
-    private String userUsername;
-    private String userFirstName;
-    private String useLastName;
-    private String userDateOfBirth;
-    private String userNationalIdentity;
-    private String userEmail;
-    private String userPassword;
+    private String username;
+    private String firstName;
+    private String lastName;
+    private String email;
     private LocalDateTime createdDate;
-    private LocalDateTime updatedDate;
-    private LocalDateTime deletedDate;
 }
