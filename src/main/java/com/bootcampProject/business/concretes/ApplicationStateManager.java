@@ -60,7 +60,7 @@ public class ApplicationStateManager implements ApplicationStateService {
 
         if (existingApplicationState == null) {
             // id not found
-            return new SuccessDataResult<>(null, ApplicationStateMessages.applicationStateNotFound);
+            return new SuccessResult(ApplicationStateMessages.applicationStateNotFound);
         }
         mapperService.forRequest().map(request, existingApplicationState);
         applicationStateRepository.save(existingApplicationState);

@@ -37,7 +37,7 @@ public class InstructorController extends BaseController {
         return handleResult(instructorService.update(request));
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteInstructor(@PathVariable int id) {
         return handleResult(instructorService.delete(id));
     }

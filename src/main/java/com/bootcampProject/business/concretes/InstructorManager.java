@@ -65,7 +65,7 @@ public class InstructorManager implements InstructorService, BaseService {
 
         if (existingInstructor == null) {
             // id not found
-            return new SuccessDataResult<>(null, InstructorMessages.instructorNotFound);
+            return new SuccessResult(InstructorMessages.instructorNotFound);
         }
 
         mapperService.forRequest().map(request, existingInstructor);

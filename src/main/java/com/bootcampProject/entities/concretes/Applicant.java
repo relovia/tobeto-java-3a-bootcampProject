@@ -21,4 +21,7 @@ public class Applicant extends User {
 
     @OneToMany(mappedBy = "applicant")
     private List<Application> applications;
+
+    @OneToOne(mappedBy = "applicant")
+    private Blacklist blacklist;
 }

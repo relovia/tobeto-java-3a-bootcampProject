@@ -66,7 +66,7 @@ public class EmployeeManager implements EmployeeService, BaseService {
 
         if (existingEmployee == null) {
             // id not found
-            return new SuccessDataResult<>(null, EmployeeMessages.employeeNotFound);
+            return new SuccessResult(EmployeeMessages.employeeNotFound);
         }
         mapperService.forRequest().map(request, existingEmployee);
         employeeRepository.save(existingEmployee);

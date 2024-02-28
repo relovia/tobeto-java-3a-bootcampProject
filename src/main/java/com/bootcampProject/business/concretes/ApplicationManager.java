@@ -54,17 +54,17 @@ public class ApplicationManager implements ApplicationService {
     }
 
     @Override
-    public DataResult<Void> update(CreateApplicationRequest request) {
+    public Result update(CreateApplicationRequest request) {
         int applicationId = request.getId();
         Application existingApplication = applicationRepository.findById(applicationId).orElse(null);
 
         if (existingApplication == null) {
             // id not found
-            return new SuccessDataResult<>(null, ApplicationMessages.applicationNotFound);
+            return new SuccessResult(ApplicationMessages.applicationNotFound);
         }
         mapperService.forRequest().map(request, existingApplication);
         applicationRepository.save(existingApplication);
-        return new SuccessDataResult<>(null, ApplicationMessages.applicationUpdated);
+        return new SuccessResult(ApplicationMessages.applicationUpdated);
     }
 
     @Override

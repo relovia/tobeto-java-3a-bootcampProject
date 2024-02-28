@@ -65,7 +65,7 @@ public class ApplicantManager implements ApplicantService, BaseService {
 
         if (existingApplicant == null) {
             // id not found
-            return new SuccessDataResult<>(null, ApplicantMessages.applicantNotFound);
+            return new SuccessResult(ApplicantMessages.applicantNotFound);
         }
         mapperService.forRequest().map(request, existingApplicant);
         applicantRepository.save(existingApplicant);

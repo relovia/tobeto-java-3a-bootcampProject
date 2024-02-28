@@ -60,7 +60,7 @@ public class BootcampStateManager implements BootcampStateService {
 
         if (existingBootcampState == null) {
             // id not found
-            return new SuccessDataResult<>(null, BootcampStateMessages.bootcampStateNotFound);
+            return new SuccessResult(BootcampStateMessages.bootcampStateNotFound);
         }
         mapperService.forResponse().map(request, existingBootcampState);
         bootcampStateRepository.save(existingBootcampState);

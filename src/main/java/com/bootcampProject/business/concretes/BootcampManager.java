@@ -60,7 +60,7 @@ public class BootcampManager implements BootcampService {
 
         if (existingBootcamp == null) {
             // id not found
-            return new SuccessDataResult<>(null, BootcampMessages.bootcampNotFound);
+            return new SuccessResult(BootcampMessages.bootcampNotFound);
         }
         mapperService.forRequest().map(request, existingBootcamp);
         bootcampRepository.save(existingBootcamp);
