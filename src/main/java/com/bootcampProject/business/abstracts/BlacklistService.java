@@ -17,5 +17,6 @@ public interface BlacklistService {
     DataResult<List<GetAllBlacklistResponse>> getAll();
     DataResult<GetBlacklistResponse> getById(int id);
     DataResult<List<GetAllBlacklistResponse>> getAllPage(PageDto pageDto);
+    boolean isBlacklisted(String email);
 
 }

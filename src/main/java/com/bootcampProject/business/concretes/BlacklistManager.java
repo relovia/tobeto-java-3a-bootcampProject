@@ -91,4 +91,10 @@ public class BlacklistManager implements BlacklistService {
                 .collect(Collectors.toList());
         return new SuccessDataResult<>(blacklistPages, BlacklistMessages.blacklistsListed);
     }
+
+    @Override
+    public boolean isBlacklisted(String email) {
+        Blacklist blacklist = blacklistRepository.getByUser_Email(email);
+        return blacklist != null;
+    }
 }

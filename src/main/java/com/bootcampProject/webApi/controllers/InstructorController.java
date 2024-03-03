@@ -3,6 +3,7 @@ package com.bootcampProject.webApi.controllers;
 import com.bootcampProject.business.abstracts.InstructorService;
 import com.bootcampProject.business.requests.create.instructor.CreateInstructorRequest;
 import com.bootcampProject.core.utilities.paging.PageDto;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class InstructorController extends BaseController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addInstructor(@RequestBody CreateInstructorRequest request) {
+    public ResponseEntity<?> addInstructor(@RequestBody @Valid CreateInstructorRequest request) {
         return handleDataResult(instructorService.add(request));
     }
 

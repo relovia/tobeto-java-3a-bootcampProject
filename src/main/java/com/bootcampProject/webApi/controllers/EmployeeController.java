@@ -3,6 +3,7 @@ package com.bootcampProject.webApi.controllers;
 import com.bootcampProject.business.abstracts.EmployeeService;
 import com.bootcampProject.business.requests.create.employee.CreateEmployeeRequest;
 import com.bootcampProject.core.utilities.paging.PageDto;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class EmployeeController extends BaseController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addEmployee(@RequestBody CreateEmployeeRequest request) {
+    public ResponseEntity<?> addEmployee(@RequestBody @Valid CreateEmployeeRequest request) {
         return handleDataResult(employeeService.add(request));
     }
 

@@ -25,4 +25,8 @@ public class Blacklist extends BaseEntity<Integer> {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "applicant_id")
     private Applicant applicant;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

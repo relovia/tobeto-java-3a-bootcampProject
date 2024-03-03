@@ -3,6 +3,7 @@ package com.bootcampProject.webApi.controllers;
 import com.bootcampProject.business.abstracts.ApplicationService;
 import com.bootcampProject.business.requests.create.application.CreateApplicationRequest;
 import com.bootcampProject.core.utilities.paging.PageDto;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class ApplicationController extends BaseController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addApplication(@RequestBody CreateApplicationRequest request) {
+    public ResponseEntity<?> addApplication(@RequestBody @Valid CreateApplicationRequest request) {
         return handleDataResult(applicationService.add(request));
     }
 

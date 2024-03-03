@@ -3,6 +3,7 @@ package com.bootcampProject.webApi.controllers;
 import com.bootcampProject.business.abstracts.BootcampService;
 import com.bootcampProject.business.requests.create.bootcamp.CreateBootcampRequest;
 import com.bootcampProject.core.utilities.paging.PageDto;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class BootcampController extends BaseController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addBootcamp(@RequestBody CreateBootcampRequest request) {
+    public ResponseEntity<?> addBootcamp(@RequestBody @Valid CreateBootcampRequest request) {
         return handleDataResult(bootcampService.add(request));
     }
 

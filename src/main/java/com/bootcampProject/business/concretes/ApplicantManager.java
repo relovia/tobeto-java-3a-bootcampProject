@@ -2,6 +2,7 @@ package com.bootcampProject.business.concretes;
 
 import com.bootcampProject.business.abstracts.ApplicantService;
 import com.bootcampProject.business.abstracts.BaseService;
+import com.bootcampProject.business.abstracts.BlacklistService;
 import com.bootcampProject.business.constants.ApplicantMessages;
 import com.bootcampProject.business.requests.create.applicant.CreateApplicantRequest;
 import com.bootcampProject.business.responses.create.applicants.CreateApplicantResponse;
@@ -32,17 +33,24 @@ import java.util.stream.Collectors;
 public class ApplicantManager implements ApplicantService, BaseService {
     private final ApplicantRepository applicantRepository;
     private final ModelMapperService mapperService;
+    private final BlacklistService blacklistService;
 
     @Autowired
-    public ApplicantManager(ApplicantRepository applicantRepository, ModelMapperService mapperService) {
+    public ApplicantManager(ApplicantRepository applicantRepository, ModelMapperService mapperService, BlacklistService blacklistService) {
         this.applicantRepository = applicantRepository;
         this.mapperService = mapperService;
+        this.blacklistService = blacklistService;
     }
 
     @Override
     public DataResult<CreateApplicantResponse> add(CreateApplicantRequest request) {
         checkIfUserExists(request.getEmail());
         checkIfUsernameExists(request.getUsername());
+
+        if (blacklistService.isBlacklisted(request.getEmail())) {
+            throw new BusinessException("Applicant is blacklisted and cannot apply...");
+        }
+
         Applicant applicant = mapperService.forRequest().map(request, Applicant.class);
         applicant.setCreatedDate(LocalDateTime.now());
         applicantRepository.save(applicant);

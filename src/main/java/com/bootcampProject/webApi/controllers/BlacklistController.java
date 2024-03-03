@@ -4,6 +4,7 @@ import com.bootcampProject.business.abstracts.BlacklistService;
 import com.bootcampProject.business.requests.create.applicant.CreateApplicantRequest;
 import com.bootcampProject.business.requests.create.blacklist.CreateBlacklistRequest;
 import com.bootcampProject.core.utilities.paging.PageDto;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class BlacklistController extends BaseController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addBlacklist(@RequestBody CreateBlacklistRequest request) {
+    public ResponseEntity<?> addBlacklist(@RequestBody @Valid CreateBlacklistRequest request) {
         return handleDataResult(blacklistService.add(request));
     }
 
