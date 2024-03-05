@@ -2,6 +2,7 @@ package com.bootcampProject.webApi.controllers;
 
 import com.bootcampProject.business.abstracts.ApplicationService;
 import com.bootcampProject.business.requests.create.application.CreateApplicationRequest;
+import com.bootcampProject.business.requests.update.application.UpdateApplicationRequest;
 import com.bootcampProject.core.utilities.paging.PageDto;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,14 @@ public class ApplicationController extends BaseController {
     public ResponseEntity<?> getApplicationId(@PathVariable int id) {
         return handleDataResult(applicationService.getById(id));
     }
+
     @GetMapping("/get/all")
     public ResponseEntity<?> getAllApplications() {
         return handleDataResult(applicationService.getAll());
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> updateApplication(@RequestBody CreateApplicationRequest request) {
+    public ResponseEntity<?> updateApplication(@RequestBody UpdateApplicationRequest request) {
         return handleResult(applicationService.update(request));
     }
 
@@ -41,6 +43,7 @@ public class ApplicationController extends BaseController {
     public ResponseEntity<?> deleteApplication(@PathVariable int id) {
         return handleResult(applicationService.delete(id));
     }
+
     @GetMapping("/sort")
     public ResponseEntity<?> getAllPage(@RequestBody PageDto pageDto) {
         return handleResult(applicationService.getAllPage(pageDto));

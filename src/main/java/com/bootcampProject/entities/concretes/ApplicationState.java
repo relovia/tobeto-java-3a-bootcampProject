@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="application_states")
+@Table(name = "application_states")
 public class ApplicationState extends BaseEntity<Integer> {
     @Column(name = "name")
     private String name;

@@ -3,9 +3,11 @@ package com.bootcampProject.business.concretes;
 import com.bootcampProject.business.abstracts.BootcampService;
 import com.bootcampProject.business.constants.BootcampMessages;
 import com.bootcampProject.business.requests.create.bootcamp.CreateBootcampRequest;
+import com.bootcampProject.business.requests.update.bootcamp.UpdateBootcampRequest;
 import com.bootcampProject.business.responses.create.bootcamp.CreateBootcampResponse;
 import com.bootcampProject.business.responses.get.bootcamp.GetAllBootcampResponse;
 import com.bootcampProject.business.responses.get.bootcamp.GetBootcampResponse;
+import com.bootcampProject.core.aspects.logging.Loggable;
 import com.bootcampProject.core.utilities.mapping.ModelMapperService;
 import com.bootcampProject.core.utilities.paging.PageDto;
 import com.bootcampProject.core.utilities.results.DataResult;
@@ -37,6 +39,7 @@ public class BootcampManager implements BootcampService {
     }
 
     @Override
+    @Loggable
     public DataResult<CreateBootcampResponse> add(CreateBootcampRequest request) {
         Bootcamp bootcamp = mapperService.forRequest().map(request, Bootcamp.class);
         bootcamp.setCreatedDate(LocalDateTime.now());
@@ -54,7 +57,8 @@ public class BootcampManager implements BootcampService {
     }
 
     @Override
-    public Result update(CreateBootcampRequest request) {
+    @Loggable
+    public Result update(UpdateBootcampRequest request) {
         int bootcampId = request.getId();
         Bootcamp existingBootcamp = bootcampRepository.findById(bootcampId).orElse(null);
 
@@ -68,6 +72,7 @@ public class BootcampManager implements BootcampService {
     }
 
     @Override
+    @Loggable
     public DataResult<List<GetAllBootcampResponse>> getAll() {
         List<Bootcamp> bootcamps = bootcampRepository.findAll();
         List<GetAllBootcampResponse> bootcampResponses = bootcamps.stream()

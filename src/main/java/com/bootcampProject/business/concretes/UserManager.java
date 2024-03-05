@@ -4,6 +4,7 @@ import com.bootcampProject.business.abstracts.UserService;
 import com.bootcampProject.business.constants.UserMessages;
 import com.bootcampProject.business.responses.get.users.GetAllUserResponse;
 import com.bootcampProject.business.responses.get.users.GetUserResponse;
+import com.bootcampProject.core.aspects.logging.Loggable;
 import com.bootcampProject.core.utilities.mapping.ModelMapperService;
 import com.bootcampProject.core.utilities.paging.PageDto;
 import com.bootcampProject.core.utilities.results.DataResult;
@@ -32,6 +33,7 @@ public class UserManager implements UserService {
     }
 
     @Override
+    @Loggable
     public DataResult<List<GetAllUserResponse>> getAll() {
         List<User> users = userRepository.findAll();
         List<GetAllUserResponse> userResponses = users.stream()
@@ -39,7 +41,9 @@ public class UserManager implements UserService {
                 .collect(Collectors.toList());
         return new SuccessDataResult<>(userResponses, UserMessages.usersListed);
     }
+
     @Override
+    @Loggable
     public DataResult<GetUserResponse> getByEmail(String email) {
         User user = userRepository.getByEmail(email);
         if (user != null) {

@@ -4,9 +4,11 @@ import com.bootcampProject.business.abstracts.BaseService;
 import com.bootcampProject.business.abstracts.InstructorService;
 import com.bootcampProject.business.constants.InstructorMessages;
 import com.bootcampProject.business.requests.create.instructor.CreateInstructorRequest;
+import com.bootcampProject.business.requests.update.instructor.UpdateInstructorRequest;
 import com.bootcampProject.business.responses.create.instructors.CreateInstructorResponse;
 import com.bootcampProject.business.responses.get.instructors.GetAllInstructorResponse;
 import com.bootcampProject.business.responses.get.instructors.GetInstructorResponse;
+import com.bootcampProject.core.aspects.logging.Loggable;
 import com.bootcampProject.core.exceptions.types.BusinessException;
 import com.bootcampProject.core.utilities.mapping.ModelMapperService;
 import com.bootcampProject.core.utilities.paging.PageDto;
@@ -40,6 +42,7 @@ public class InstructorManager implements InstructorService, BaseService {
     }
 
     @Override
+    @Loggable
     public DataResult<CreateInstructorResponse> add(CreateInstructorRequest request) {
         checkIfUserExists(request.getEmail());
         checkIfUsernameExists(request.getUsername());
@@ -59,7 +62,8 @@ public class InstructorManager implements InstructorService, BaseService {
     }
 
     @Override
-    public Result update(CreateInstructorRequest request) {
+    @Loggable
+    public Result update(UpdateInstructorRequest request) {
         int instructorId = request.getId();
         Instructor existingInstructor = instructorRepository.findById(instructorId).orElse(null);
 
@@ -75,6 +79,7 @@ public class InstructorManager implements InstructorService, BaseService {
     }
 
     @Override
+    @Loggable
     public DataResult<List<GetAllInstructorResponse>> getAll() {
         List<Instructor> instructors = instructorRepository.findAll();
         List<GetAllInstructorResponse> instructorResponses = instructors.stream()
@@ -86,7 +91,7 @@ public class InstructorManager implements InstructorService, BaseService {
     @Override
     public DataResult<GetInstructorResponse> getById(int id) {
         Instructor instructor = instructorRepository.getById(id);
-        GetInstructorResponse response = mapperService.forResponse().map(instructor,GetInstructorResponse.class);
+        GetInstructorResponse response = mapperService.forResponse().map(instructor, GetInstructorResponse.class);
         return new SuccessDataResult<>(response, InstructorMessages.instructorListed);
     }
 

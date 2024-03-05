@@ -16,10 +16,10 @@ import java.time.LocalDateTime;
 @Table(name = "blacklists")
 @EqualsAndHashCode(callSuper = true)
 public class Blacklist extends BaseEntity<Integer> {
-    @Column(name="reason")
+    @Column(name = "reason")
     private String reason;
 
-    @Column(name="date")
+    @Column(name = "date")
     private LocalDateTime date;
 
     @OneToOne(cascade = CascadeType.ALL)

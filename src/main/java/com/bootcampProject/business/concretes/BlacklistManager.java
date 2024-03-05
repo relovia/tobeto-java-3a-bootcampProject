@@ -3,9 +3,11 @@ package com.bootcampProject.business.concretes;
 import com.bootcampProject.business.abstracts.BlacklistService;
 import com.bootcampProject.business.constants.BlacklistMessages;
 import com.bootcampProject.business.requests.create.blacklist.CreateBlacklistRequest;
+import com.bootcampProject.business.requests.update.blacklist.UpdateBlacklistRequest;
 import com.bootcampProject.business.responses.create.blacklist.CreateBlacklistResponse;
 import com.bootcampProject.business.responses.get.blacklist.GetAllBlacklistResponse;
 import com.bootcampProject.business.responses.get.blacklist.GetBlacklistResponse;
+import com.bootcampProject.core.aspects.logging.Loggable;
 import com.bootcampProject.core.utilities.mapping.ModelMapperService;
 import com.bootcampProject.core.utilities.paging.PageDto;
 import com.bootcampProject.core.utilities.results.DataResult;
@@ -37,6 +39,7 @@ public class BlacklistManager implements BlacklistService {
     }
 
     @Override
+    @Loggable
     public DataResult<CreateBlacklistResponse> add(CreateBlacklistRequest request) {
         Blacklist blacklist = mapperService.forResponse().map(request, Blacklist.class);
         blacklist.setCreatedDate(LocalDateTime.now());
@@ -53,7 +56,8 @@ public class BlacklistManager implements BlacklistService {
     }
 
     @Override
-    public Result update(CreateBlacklistRequest request) {
+    @Loggable
+    public Result update(UpdateBlacklistRequest request) {
         int blacklistId = request.getId();
         Blacklist existingBlacklist = blacklistRepository.findById(blacklistId).orElse(null);
         if (existingBlacklist == null) {
@@ -66,6 +70,7 @@ public class BlacklistManager implements BlacklistService {
     }
 
     @Override
+    @Loggable
     public DataResult<List<GetAllBlacklistResponse>> getAll() {
         List<Blacklist> blacklists = blacklistRepository.findAll();
         List<GetAllBlacklistResponse> blacklistResponses = blacklists.stream()

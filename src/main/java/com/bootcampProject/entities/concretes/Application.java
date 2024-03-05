@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="applications")
+@Table(name = "applications")
 public class Application extends BaseEntity<Integer> {
     @ManyToOne
     @JoinColumn(name = "applicant_id")

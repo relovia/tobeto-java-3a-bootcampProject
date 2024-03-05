@@ -1,8 +1,8 @@
 package com.bootcampProject.webApi.controllers;
 
 import com.bootcampProject.business.abstracts.BlacklistService;
-import com.bootcampProject.business.requests.create.applicant.CreateApplicantRequest;
 import com.bootcampProject.business.requests.create.blacklist.CreateBlacklistRequest;
+import com.bootcampProject.business.requests.update.blacklist.UpdateBlacklistRequest;
 import com.bootcampProject.core.utilities.paging.PageDto;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class BlacklistController extends BaseController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> updateBlacklist(@RequestBody CreateBlacklistRequest request) {
+    public ResponseEntity<?> updateBlacklist(@RequestBody UpdateBlacklistRequest request) {
         return handleResult(blacklistService.update(request));
     }
 
@@ -43,6 +43,7 @@ public class BlacklistController extends BaseController {
     public ResponseEntity<?> deleteBlacklist(@PathVariable int id) {
         return handleResult(blacklistService.delete(id));
     }
+
     @GetMapping("/sort")
     public ResponseEntity<?> getAllPage(@RequestBody PageDto pageDto) {
         return handleResult(blacklistService.getAllPage(pageDto));

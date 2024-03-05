@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="bootcamp_states")
+@Table(name = "bootcamp_states")
 public class BootcampState extends BaseEntity<Integer> {
     @Column(name = "name")
     private String name;

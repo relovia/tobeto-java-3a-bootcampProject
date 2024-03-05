@@ -11,9 +11,6 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateInstructorRequest {
-    @Positive
-    private int id;
-
     @NotEmpty(message = "First name cannot be empty...")
     private String firstName;
 

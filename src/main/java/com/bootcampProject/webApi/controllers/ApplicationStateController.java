@@ -2,6 +2,7 @@ package com.bootcampProject.webApi.controllers;
 
 import com.bootcampProject.business.abstracts.ApplicationStateService;
 import com.bootcampProject.business.requests.create.applicationState.CreateApplicationStateRequest;
+import com.bootcampProject.business.requests.update.applicationState.UpdateApplicationStateRequest;
 import com.bootcampProject.core.utilities.paging.PageDto;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ public class ApplicationStateController extends BaseController {
     public ApplicationStateController(ApplicationStateService applicationStateService) {
         this.applicationStateService = applicationStateService;
     }
+
     @PostMapping("/add")
     public ResponseEntity<?> addApplication(@RequestBody @Valid CreateApplicationStateRequest request) {
         return handleDataResult(applicationStateService.add(request));
@@ -26,13 +28,14 @@ public class ApplicationStateController extends BaseController {
     public ResponseEntity<?> getApplicationId(@PathVariable int id) {
         return handleDataResult(applicationStateService.getById(id));
     }
+
     @GetMapping("/get/all")
     public ResponseEntity<?> getAllApplications() {
         return handleDataResult(applicationStateService.getAll());
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> updateApplication(@RequestBody CreateApplicationStateRequest request) {
+    public ResponseEntity<?> updateApplication(@RequestBody UpdateApplicationStateRequest request) {
         return handleResult(applicationStateService.update(request));
     }
 
@@ -40,6 +43,7 @@ public class ApplicationStateController extends BaseController {
     public ResponseEntity<?> deleteApplication(@PathVariable int id) {
         return handleResult(applicationStateService.delete(id));
     }
+
     @GetMapping("/sort")
     public ResponseEntity<?> getAllPage(@RequestBody PageDto pageDto) {
         return handleResult(applicationStateService.getAllPage(pageDto));

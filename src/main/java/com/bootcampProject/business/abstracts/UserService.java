@@ -9,7 +9,9 @@ import java.util.List;
 
 public interface UserService {
     DataResult<List<GetAllUserResponse>> getAll();
+
     DataResult<GetUserResponse> getByEmail(String email);
+
     DataResult<List<GetAllUserResponse>> getAllPage(PageDto pageDto);
 
 }

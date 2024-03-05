@@ -3,9 +3,11 @@ package com.bootcampProject.business.concretes;
 import com.bootcampProject.business.abstracts.ApplicationStateService;
 import com.bootcampProject.business.constants.ApplicationStateMessages;
 import com.bootcampProject.business.requests.create.applicationState.CreateApplicationStateRequest;
+import com.bootcampProject.business.requests.update.applicationState.UpdateApplicationStateRequest;
 import com.bootcampProject.business.responses.create.applicationState.CreateApplicationStateResponse;
 import com.bootcampProject.business.responses.get.applicationState.GetAllApplicationStateResponse;
 import com.bootcampProject.business.responses.get.applicationState.GetApplicationStateResponse;
+import com.bootcampProject.core.aspects.logging.Loggable;
 import com.bootcampProject.core.utilities.mapping.ModelMapperService;
 import com.bootcampProject.core.utilities.paging.PageDto;
 import com.bootcampProject.core.utilities.results.DataResult;
@@ -37,6 +39,7 @@ public class ApplicationStateManager implements ApplicationStateService {
     }
 
     @Override
+    @Loggable
     public DataResult<CreateApplicationStateResponse> add(CreateApplicationStateRequest request) {
         ApplicationState applicationState = mapperService.forRequest().map(request, ApplicationState.class);
         applicationState.setCreatedDate(LocalDateTime.now());
@@ -54,7 +57,8 @@ public class ApplicationStateManager implements ApplicationStateService {
     }
 
     @Override
-    public Result update(CreateApplicationStateRequest request) {
+    @Loggable
+    public Result update(UpdateApplicationStateRequest request) {
         int applicationStateId = request.getId();
         ApplicationState existingApplicationState = applicationStateRepository.findById(applicationStateId).orElse(null);
 
@@ -68,6 +72,7 @@ public class ApplicationStateManager implements ApplicationStateService {
     }
 
     @Override
+    @Loggable
     public DataResult<List<GetAllApplicationStateResponse>> getAll() {
         List<ApplicationState> applications = applicationStateRepository.findAll();
         List<GetAllApplicationStateResponse> applicationStateResponses = applications.stream()

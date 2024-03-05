@@ -3,9 +3,11 @@ package com.bootcampProject.business.concretes;
 import com.bootcampProject.business.abstracts.BootcampStateService;
 import com.bootcampProject.business.constants.BootcampStateMessages;
 import com.bootcampProject.business.requests.create.bootcampState.CreateBootcampStateRequest;
+import com.bootcampProject.business.requests.update.bootcampState.UpdateBootcampStateRequest;
 import com.bootcampProject.business.responses.create.bootcampState.CreateBootcampStateResponse;
 import com.bootcampProject.business.responses.get.bootcampState.GetAllBootcampStateResponse;
 import com.bootcampProject.business.responses.get.bootcampState.GetBootcampStateResponse;
+import com.bootcampProject.core.aspects.logging.Loggable;
 import com.bootcampProject.core.utilities.mapping.ModelMapperService;
 import com.bootcampProject.core.utilities.paging.PageDto;
 import com.bootcampProject.core.utilities.results.DataResult;
@@ -37,6 +39,7 @@ public class BootcampStateManager implements BootcampStateService {
     }
 
     @Override
+    @Loggable
     public DataResult<CreateBootcampStateResponse> add(CreateBootcampStateRequest request) {
         BootcampState bootcampState = mapperService.forRequest().map(request, BootcampState.class);
         bootcampState.setCreatedDate(LocalDateTime.now());
@@ -54,7 +57,8 @@ public class BootcampStateManager implements BootcampStateService {
     }
 
     @Override
-    public Result update(CreateBootcampStateRequest request) {
+    @Loggable
+    public Result update(UpdateBootcampStateRequest request) {
         int bootcampStateId = request.getId();
         BootcampState existingBootcampState = bootcampStateRepository.findById(bootcampStateId).orElse(null);
 
@@ -68,6 +72,7 @@ public class BootcampStateManager implements BootcampStateService {
     }
 
     @Override
+    @Loggable
     public DataResult<List<GetAllBootcampStateResponse>> getAll() {
         List<BootcampState> bootcampStates = bootcampStateRepository.findAll();
         List<GetAllBootcampStateResponse> bootcampStateResponses = bootcampStates.stream()

@@ -1,6 +1,7 @@
 package com.bootcampProject.business.abstracts;
 
 import com.bootcampProject.business.requests.create.applicationState.CreateApplicationStateRequest;
+import com.bootcampProject.business.requests.update.applicationState.UpdateApplicationStateRequest;
 import com.bootcampProject.business.responses.create.applicationState.CreateApplicationStateResponse;
 import com.bootcampProject.business.responses.get.applicationState.GetAllApplicationStateResponse;
 import com.bootcampProject.business.responses.get.applicationState.GetApplicationStateResponse;
@@ -12,10 +13,15 @@ import java.util.List;
 
 public interface ApplicationStateService {
     DataResult<CreateApplicationStateResponse> add(CreateApplicationStateRequest request);
+
     Result delete(int id);
-    Result update(CreateApplicationStateRequest request);
+
+    Result update(UpdateApplicationStateRequest request);
+
     DataResult<List<GetAllApplicationStateResponse>> getAll();
+
     DataResult<GetApplicationStateResponse> getById(int id);
+
     DataResult<List<GetAllApplicationStateResponse>> getAllPage(PageDto pageDto);
 
 }

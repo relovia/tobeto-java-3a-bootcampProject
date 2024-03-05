@@ -1,7 +1,6 @@
 package com.bootcampProject.business.requests.create.application;
 
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,9 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateApplicationRequest {
-    @Positive
-    private int id;
-
     @NotNull(message = "applicantId cannot be null...")
     private int applicantId;
 

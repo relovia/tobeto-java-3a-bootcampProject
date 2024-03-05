@@ -2,6 +2,7 @@ package com.bootcampProject.webApi.controllers;
 
 import com.bootcampProject.business.abstracts.EmployeeService;
 import com.bootcampProject.business.requests.create.employee.CreateEmployeeRequest;
+import com.bootcampProject.business.requests.update.employee.UpdateEmployeeRequest;
 import com.bootcampProject.core.utilities.paging.PageDto;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,14 +35,15 @@ public class EmployeeController extends BaseController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> updateEmployee(@RequestBody CreateEmployeeRequest request) {
-       return handleResult(employeeService.update(request));
+    public ResponseEntity<?> updateEmployee(@RequestBody UpdateEmployeeRequest request) {
+        return handleResult(employeeService.update(request));
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable int id) {
         return handleResult(employeeService.delete(id));
     }
+
     @GetMapping("/sort")
     public ResponseEntity<?> getAllPage(@RequestBody PageDto pageDto) {
         return handleResult(employeeService.getAllPage(pageDto));

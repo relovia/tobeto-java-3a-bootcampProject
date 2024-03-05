@@ -2,6 +2,7 @@ package com.bootcampProject.webApi.controllers;
 
 import com.bootcampProject.business.abstracts.ApplicantService;
 import com.bootcampProject.business.requests.create.applicant.CreateApplicantRequest;
+import com.bootcampProject.business.requests.update.application.UpdateApplicationRequest;
 import com.bootcampProject.core.utilities.paging.PageDto;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class ApplicantController extends BaseController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> updateApplicant(@RequestBody CreateApplicantRequest request) {
+    public ResponseEntity<?> updateApplicant(@RequestBody UpdateApplicationRequest request) {
         return handleResult(applicantService.update(request));
     }
 

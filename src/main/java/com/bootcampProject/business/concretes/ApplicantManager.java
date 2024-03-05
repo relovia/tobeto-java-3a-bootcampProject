@@ -5,9 +5,11 @@ import com.bootcampProject.business.abstracts.BaseService;
 import com.bootcampProject.business.abstracts.BlacklistService;
 import com.bootcampProject.business.constants.ApplicantMessages;
 import com.bootcampProject.business.requests.create.applicant.CreateApplicantRequest;
+import com.bootcampProject.business.requests.update.application.UpdateApplicationRequest;
 import com.bootcampProject.business.responses.create.applicants.CreateApplicantResponse;
 import com.bootcampProject.business.responses.get.applicants.GetAllApplicantResponse;
 import com.bootcampProject.business.responses.get.applicants.GetApplicantResponse;
+import com.bootcampProject.core.aspects.logging.Loggable;
 import com.bootcampProject.core.exceptions.types.BusinessException;
 import com.bootcampProject.core.utilities.mapping.ModelMapperService;
 import com.bootcampProject.core.utilities.paging.PageDto;
@@ -43,6 +45,7 @@ public class ApplicantManager implements ApplicantService, BaseService {
     }
 
     @Override
+    @Loggable
     public DataResult<CreateApplicantResponse> add(CreateApplicantRequest request) {
         checkIfUserExists(request.getEmail());
         checkIfUsernameExists(request.getUsername());
@@ -67,7 +70,8 @@ public class ApplicantManager implements ApplicantService, BaseService {
     }
 
     @Override
-    public Result update(CreateApplicantRequest request) {
+    @Loggable
+    public Result update(UpdateApplicationRequest request) {
         int applicantId = request.getId();
         Applicant existingApplicant = applicantRepository.findById(applicantId).orElse(null);
 
@@ -81,11 +85,12 @@ public class ApplicantManager implements ApplicantService, BaseService {
     }
 
     @Override
+    @Loggable
     public DataResult<List<GetAllApplicantResponse>> getAll() {
         List<Applicant> applicants = applicantRepository.findAll();
         List<GetAllApplicantResponse> applicantResponses = applicants.stream()
                 .map(applicant -> mapperService.forResponse().map(applicant, GetAllApplicantResponse.class))
-                        .collect(Collectors.toList());
+                .collect(Collectors.toList());
         return new SuccessDataResult<>(applicantResponses, ApplicantMessages.applicantsListed);
     }
 

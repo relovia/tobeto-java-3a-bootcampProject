@@ -17,12 +17,12 @@ public class BaseEntity<T> {
     @Column(name = "id")
     private T id;
 
-    @Column(name="createdDate")
+    @Column(name = "createdDate")
     private LocalDateTime createdDate;
 
-    @Column(name="updatedDate")
+    @Column(name = "updatedDate")
     private LocalDateTime updatedDate;
 
-    @Column(name="deletedDate")
+    @Column(name = "deletedDate")
     private LocalDateTime deletedDate;
 }

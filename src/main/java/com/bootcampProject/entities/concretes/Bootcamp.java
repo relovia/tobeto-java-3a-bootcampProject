@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="bootcamps")
+@Table(name = "bootcamps")
 public class Bootcamp extends BaseEntity<Integer> {
     @Column(name = "name")
     private String name;

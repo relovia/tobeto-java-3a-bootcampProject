@@ -2,6 +2,7 @@ package com.bootcampProject.webApi.controllers;
 
 import com.bootcampProject.business.abstracts.BootcampService;
 import com.bootcampProject.business.requests.create.bootcamp.CreateBootcampRequest;
+import com.bootcampProject.business.requests.update.bootcamp.UpdateBootcampRequest;
 import com.bootcampProject.core.utilities.paging.PageDto;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class BootcampController extends BaseController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> updateBootcamp(@RequestBody CreateBootcampRequest request) {
+    public ResponseEntity<?> updateBootcamp(@RequestBody UpdateBootcampRequest request) {
         return handleResult(bootcampService.update(request));
     }
 
@@ -42,6 +43,7 @@ public class BootcampController extends BaseController {
     public ResponseEntity<?> deleteBootcamp(@PathVariable int id) {
         return handleResult(bootcampService.delete(id));
     }
+
     @GetMapping("/sort")
     public ResponseEntity<?> getAllPage(@RequestBody PageDto pageDto) {
         return handleResult(bootcampService.getAllPage(pageDto));

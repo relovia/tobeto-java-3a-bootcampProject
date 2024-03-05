@@ -1,6 +1,7 @@
 package com.bootcampProject.business.abstracts;
 
 import com.bootcampProject.business.requests.create.applicant.CreateApplicantRequest;
+import com.bootcampProject.business.requests.update.application.UpdateApplicationRequest;
 import com.bootcampProject.business.responses.create.applicants.CreateApplicantResponse;
 import com.bootcampProject.business.responses.get.applicants.GetAllApplicantResponse;
 import com.bootcampProject.business.responses.get.applicants.GetApplicantResponse;
@@ -12,9 +13,14 @@ import java.util.List;
 
 public interface ApplicantService {
     DataResult<CreateApplicantResponse> add(CreateApplicantRequest request);
+
     Result delete(int id);
-    Result update(CreateApplicantRequest request);
+
+    Result update(UpdateApplicationRequest request);
+
     DataResult<List<GetAllApplicantResponse>> getAll();
+
     DataResult<GetApplicantResponse> getById(int id);
+
     DataResult<List<GetAllApplicantResponse>> getAllPage(PageDto pageDto);
 }

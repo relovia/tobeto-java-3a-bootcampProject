@@ -3,9 +3,11 @@ package com.bootcampProject.business.concretes;
 import com.bootcampProject.business.abstracts.ApplicationService;
 import com.bootcampProject.business.constants.ApplicationMessages;
 import com.bootcampProject.business.requests.create.application.CreateApplicationRequest;
+import com.bootcampProject.business.requests.update.application.UpdateApplicationRequest;
 import com.bootcampProject.business.responses.create.application.CreateApplicationResponse;
 import com.bootcampProject.business.responses.get.application.GetAllApplicationResponse;
 import com.bootcampProject.business.responses.get.application.GetApplicationResponse;
+import com.bootcampProject.core.aspects.logging.Loggable;
 import com.bootcampProject.core.utilities.mapping.ModelMapperService;
 import com.bootcampProject.core.utilities.paging.PageDto;
 import com.bootcampProject.core.utilities.results.DataResult;
@@ -37,6 +39,7 @@ public class ApplicationManager implements ApplicationService {
     }
 
     @Override
+    @Loggable
     public DataResult<CreateApplicationResponse> add(CreateApplicationRequest request) {
         Application application = mapperService.forRequest().map(request, Application.class);
         application.setCreatedDate(LocalDateTime.now());
@@ -54,7 +57,8 @@ public class ApplicationManager implements ApplicationService {
     }
 
     @Override
-    public Result update(CreateApplicationRequest request) {
+    @Loggable
+    public Result update(UpdateApplicationRequest request) {
         int applicationId = request.getId();
         Application existingApplication = applicationRepository.findById(applicationId).orElse(null);
 
@@ -68,6 +72,7 @@ public class ApplicationManager implements ApplicationService {
     }
 
     @Override
+    @Loggable
     public DataResult<List<GetAllApplicationResponse>> getAll() {
         List<Application> applications = applicationRepository.findAll();
         List<GetAllApplicationResponse> applicationResponses = applications.stream()

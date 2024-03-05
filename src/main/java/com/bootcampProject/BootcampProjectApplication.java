@@ -8,10 +8,14 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @SpringBootApplication
 @RestControllerAdvice
-public class 	BootcampProjectApplication {
+public class BootcampProjectApplication {
 
-	public static void main(String[] args) { SpringApplication.run(BootcampProjectApplication.class, args); }
+    public static void main(String[] args) {
+        SpringApplication.run(BootcampProjectApplication.class, args);
+    }
 
-	@Bean
-	public ModelMapper getModelMapper() { return new ModelMapper();	}
+    @Bean
+    public ModelMapper getModelMapper() {
+        return new ModelMapper();
+    }
 }

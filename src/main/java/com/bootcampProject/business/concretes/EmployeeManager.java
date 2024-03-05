@@ -4,9 +4,11 @@ import com.bootcampProject.business.abstracts.BaseService;
 import com.bootcampProject.business.abstracts.EmployeeService;
 import com.bootcampProject.business.constants.EmployeeMessages;
 import com.bootcampProject.business.requests.create.employee.CreateEmployeeRequest;
+import com.bootcampProject.business.requests.update.employee.UpdateEmployeeRequest;
 import com.bootcampProject.business.responses.create.employees.CreateEmployeeResponse;
 import com.bootcampProject.business.responses.get.employees.GetAllEmployeeResponse;
 import com.bootcampProject.business.responses.get.employees.GetEmployeeResponse;
+import com.bootcampProject.core.aspects.logging.Loggable;
 import com.bootcampProject.core.exceptions.types.BusinessException;
 import com.bootcampProject.core.utilities.mapping.ModelMapperService;
 import com.bootcampProject.core.utilities.paging.PageDto;
@@ -40,6 +42,7 @@ public class EmployeeManager implements EmployeeService, BaseService {
     }
 
     @Override
+    @Loggable
     public DataResult<CreateEmployeeResponse> add(CreateEmployeeRequest request) {
         checkIfUserExists(request.getEmail());
         checkIfUsernameExists(request.getUsername());
@@ -60,7 +63,8 @@ public class EmployeeManager implements EmployeeService, BaseService {
     }
 
     @Override
-    public Result update(CreateEmployeeRequest request) {
+    @Loggable
+    public Result update(UpdateEmployeeRequest request) {
         int employeeId = request.getId();
         Employee existingEmployee = employeeRepository.findById(employeeId).orElse(null);
 
@@ -72,7 +76,9 @@ public class EmployeeManager implements EmployeeService, BaseService {
         employeeRepository.save(existingEmployee);
         return new SuccessResult(EmployeeMessages.employeeUpdated);
     }
+
     @Override
+    @Loggable
     public DataResult<List<GetAllEmployeeResponse>> getAll() {
         List<Employee> employees = employeeRepository.findAll();
         List<GetAllEmployeeResponse> employeeResponses = employees.stream()
