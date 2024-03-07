@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  bootcampdbdev:
+    container_name: bootcampdbdev
+    image: postgres
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=12345
+    volumes:
+      - db-data:/var/lib/postgresql/data
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+
+volumes:
+  db-data:
