@@ -1,11 +1,11 @@
 version: "3.8"
 
 services:
-  bootcampdbdev:
+  bootcampdbev:
     container_name: bootcampdbdev
     image: postgres
     ports:
-      - "5433:5432"
+      - "5436:5432"
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=12345
